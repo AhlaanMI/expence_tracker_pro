@@ -1,9 +1,16 @@
 const errorHandler = (err, req, res, next) => {
-  if (error) {
-    res.status(400).json({
-      status: "failed",
-      error: error,
-    });
+  if (err) {
+    if (err.message) {
+      res.status(400).json({
+        status: "failed",
+        err: err.message,
+      });
+    } else {
+      res.status(400).json({
+        status: "failed",
+        err: err,
+      });
+    }
   } else {
     next();
   }
